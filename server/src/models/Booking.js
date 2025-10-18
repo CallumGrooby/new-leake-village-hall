@@ -6,7 +6,7 @@ const { Schema } = mongoose;
 const BookingSchema = new Schema({
   name: String,
   emailAddress: String,
-  date: String,
+  date: Date,
   time: String,
   message: String,
   approved: Boolean,

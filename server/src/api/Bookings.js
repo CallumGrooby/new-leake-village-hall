@@ -33,7 +33,7 @@ BookingRouter.post("/add-booking", async (req, res) => {
     const newBooking = new Booking({
       name,
       emailAddress,
-      date,
+      date: new Date(date),
       time,
       message,
       approved: false,
@@ -105,7 +105,7 @@ BookingRouter.delete("/bookings/:id", authMiddleware, async (req, res) => {
   }
 });
 
-BookingRouter.put("/bookings/:id", authMiddleware, async (req, res) => {
+BookingRouter.put("/bookings/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -133,5 +133,46 @@ BookingRouter.put("/bookings/:id", authMiddleware, async (req, res) => {
       status: "FAILED",
       message: "Error updating booking",
     });
+  }
+});
+
+BookingRouter.get("/all-bookings", async (req, res) => {
+  try {
+    const bookings = await Booking.find();
+    res.json({
+      status: "SUCCESS",
+      message: "Bookings retrieved successfully",
+      data: bookings,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: "FAILED",
+      message: "Error retrieving bookings",
+    });
+  }
+});
+
+BookingRouter.get("/bookings-by-month", async (req, res) => {
+  try {
+    const { year, month } = req.query;
+    const filter = {};
+
+    if (year && month) {
+      const start = new Date(year, month - 1, 1); // e.g. 2025-10-01
+      const end = new Date(year, month, 1); // e.g. 2025-11-01
+      filter.date = { $gte: start, $lt: end };
+    }
+
+    const bookings = await Booking.find(filter).sort({ date: 1 });
+    res.json({
+      status: "SUCCESS",
+      data: bookings,
+    });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ status: "FAILED", message: "Error retrieving bookings" });
   }
 });
