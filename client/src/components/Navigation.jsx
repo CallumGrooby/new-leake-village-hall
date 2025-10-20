@@ -115,7 +115,10 @@ const MobileNav = ({ links, open, onClose }) => {
 
 const DesktopNav = ({ links }) => {
   return (
-    <div id="desktop-menu" className={"flex flex-row items-center gap-8"}>
+    <div
+      id="desktop-menu"
+      className={"md:flex flex-row items-center gap-8 hidden "}
+    >
       <AnimatePresence>
         <motion.ul
           key="menu"
@@ -134,7 +137,7 @@ const DesktopNav = ({ links }) => {
             >
               <Link
                 to={link.link}
-                className="text-2xl font-semibold font-mulish text-primary-200-200 hover:text-primary-100 transition"
+                className="text-base font-semibold font-mulish text-primary-200-200 hover:text-primary-100 transition"
               >
                 {link.name}
               </Link>
@@ -145,7 +148,7 @@ const DesktopNav = ({ links }) => {
         <motion.div className="">
           <Link
             to="/bookings"
-            className="block bg-primary-200 text-background text-center transition-colors duration-300 uppercase text-2xl py-2 px-6 rounded-none hover:bg-primary-100 hover:text-accent"
+            className="block bg-primary-200 text-background text-center transition-colors duration-300 uppercase text-base py-2 px-6 rounded-none hover:bg-primary-100 hover:text-accent"
           >
             Hire the Hall
           </Link>
