@@ -16,7 +16,7 @@
 .calendar ol {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-gap: 0.25em;
+  /* grid-gap: 0.25em; */
   margin: 0 auto;
   /* max-width: 80em; */
   padding: 0;
@@ -36,7 +36,7 @@
   margin-bottom: 1em;
 }
 .weekdays li {
-  height: 4vw;
+  height: 2vw;
 }
 
 /* .dayGrid li {

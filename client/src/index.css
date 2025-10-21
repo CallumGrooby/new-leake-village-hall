@@ -40,5 +40,13 @@
 }
 
 .check-box {
-  @apply appearance-none w-5 h-5 border-2 border-black cursor-pointer checked:bg-primary-200 checked:border-black transition-colors duration-300 ease-in-out;
+  @apply appearance-none w-5 h-5 border-2 border-background cursor-pointer checked:bg-accent checked:border-accent transition-colors duration-300 ease-in-out;
+}
+
+.form-label {
+  @apply mb-1 font-mulish uppercase text-accent text-base tracking-widest;
+}
+
+.form-input {
+  @apply border border-black px-3 py-2 text-sm focus:border-accent focus:ring focus:ring-accent/50 rounded-md outline-none transition-all duration-300 ease-in-out bg-background text-text;
 }

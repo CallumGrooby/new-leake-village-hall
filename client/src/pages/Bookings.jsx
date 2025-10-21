@@ -105,10 +105,14 @@ export const Bookings = () => {
   };
 
   return (
-    <section className="flex md:flex-row flex-col max-w-[1920px] w-full mx-auto grow items-start gap-8">
-      <article className="basis-1/4 pt-16">
-        <h2 className="text-xl">EMNL Village Hall.</h2>
-        <h1 className="text-4xl mb-8">Reservation Page</h1>
+    <section className="flex md:flex-row flex-col max-w-[1920px] w-full mx-auto grow gap-8 h-full my-12">
+      <article className="basis-1/4 pt-16 bg-primary-200 text-background px-8">
+        <h2 className="text-xl text-accent font-light font-mulish">
+          EMNL Village Hall.
+        </h2>
+        <h1 className="text-4xl mb-8 font-bold leading-tight">
+          Reservation Page
+        </h1>
 
         <DateForm formRef={dateFormRef} handleSubmit={handleDateSubmit} />
         {dateError && <p className="text-red-500">{dateError}</p>}
@@ -155,10 +159,7 @@ const DateForm = ({ formRef, handleSubmit }) => {
     >
       <div className="flex flex-row gap-2">
         <div className="flex flex-col basis-1/2">
-          <label
-            htmlFor="start-time"
-            className="mb-1 text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="start-time" className="form-label">
             Start Time
           </label>
           <input
@@ -166,15 +167,12 @@ const DateForm = ({ formRef, handleSubmit }) => {
             id="start-time"
             name="start-time"
             required
-            className=" border border-black px-3 py-2 text-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className=" form-input"
           />
         </div>
 
         <div className="flex flex-col basis-1/2">
-          <label
-            htmlFor="finish-time"
-            className="mb-1 text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="finish-time" className="form-label">
             Finish Time
           </label>
           <input
@@ -182,16 +180,13 @@ const DateForm = ({ formRef, handleSubmit }) => {
             id="finish-time"
             name="finish-time"
             required
-            className=" border border-black px-3 py-2 text-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className=" form-input"
           />
         </div>
       </div>
 
       <div className="flex flex-col grow">
-        <label
-          htmlFor="date"
-          className="mb-1 text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="date" className="form-label">
           Date
         </label>
         <input
@@ -199,7 +194,7 @@ const DateForm = ({ formRef, handleSubmit }) => {
           id="date"
           name="date"
           required
-          className=" border border-black px-3 py-2 text-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+          className=" form-input"
         />
       </div>
     </form>
@@ -211,14 +206,11 @@ const ContactForm = ({ formRef, handleSubmit, isFormShowing }) => {
     <form
       ref={formRef}
       onSubmit={handleSubmit}
-      className={"flex flex-col gap-4 " + (isFormShowing ? "" : "hidden")}
+      className={"flex flex-col gap-4 mt-4 " + (isFormShowing ? "" : "hidden")}
     >
       <div className="flex flex-row gap-2">
         <div className="flex flex-col basis-1/2">
-          <label
-            htmlFor="first-name"
-            className="mb-1 text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="first-name" className="form-label">
             First Name
           </label>
           <input
@@ -226,16 +218,13 @@ const ContactForm = ({ formRef, handleSubmit, isFormShowing }) => {
             id="first-name"
             name="first-name"
             autoComplete="given-name"
-            className=" border border-black px-3 py-2 text-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className=" form-input"
             required
           />
         </div>
 
         <div className="flex flex-col basis-1/2">
-          <label
-            htmlFor="last-name"
-            className="mb-1 text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="last-name" className="form-label">
             Last Name
           </label>
           <input
@@ -243,7 +232,7 @@ const ContactForm = ({ formRef, handleSubmit, isFormShowing }) => {
             id="last-name"
             name="last-name"
             autoComplete="family-name"
-            className=" border border-black px-3 py-2 text-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className=" form-input"
             required
           />
         </div>
@@ -251,10 +240,7 @@ const ContactForm = ({ formRef, handleSubmit, isFormShowing }) => {
 
       <div className="flex flex-row gap-2">
         <div className="flex flex-col basis-1/2">
-          <label
-            htmlFor="phone"
-            className="mb-1 text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="phone" className="form-label">
             Phone Number
           </label>
           <input
@@ -263,15 +249,12 @@ const ContactForm = ({ formRef, handleSubmit, isFormShowing }) => {
             name="phone"
             autoComplete="tel"
             inputMode="tel"
-            className=" border border-black px-3 py-2 text-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className=" form-input"
           />
         </div>
 
         <div className="flex flex-col basis-1/2">
-          <label
-            htmlFor="email"
-            className="mb-1 text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="email" className="form-label">
             Email
           </label>
           <input
@@ -279,40 +262,30 @@ const ContactForm = ({ formRef, handleSubmit, isFormShowing }) => {
             id="email"
             name="email"
             autoComplete="email"
-            className=" border border-black px-3 py-2 text-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className=" form-input"
             required
           />
         </div>
       </div>
 
       <div className="flex flex-col">
-        <label
-          htmlFor="address"
-          className="mb-1 text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="address" className="form-label">
           Address
         </label>
         <input
           type="address"
           id="address"
           name="address"
-          className=" border border-black px-3 py-2 text-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+          className=" form-input"
           required
         />
       </div>
 
       <div className="flex flex-col">
-        <label
-          htmlFor="event-type"
-          className="mb-1 text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="event-type" className="form-label">
           Event Type
         </label>
-        <select
-          name="event-type"
-          id="event-type"
-          className=" border-2 border-black px-3 py-2 text-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-        >
+        <select name="event-type" id="event-type" className="form-input  ">
           <option value="wedding">Wedding</option>
           <option value="corporate">Corporate</option>
           <option value="birthday">Birthday</option>
@@ -320,40 +293,42 @@ const ContactForm = ({ formRef, handleSubmit, isFormShowing }) => {
         </select>
       </div>
 
-      <label>Facilities</label>
-      <span className="flex flex-row gap-4">
-        <div className="flex flex-row gap-2 items-center">
-          <label htmlFor="facility1">Main Hall</label>
-          <input
-            type="checkbox"
-            id="facility1"
-            name="facility1"
-            value="Main Hall"
-            className="check-box"
-          />
-        </div>
+      <span>
+        <label className="form-label">Facilities</label>
+        <span className="flex flex-row gap-4">
+          <div className="flex flex-row gap-2 items-center">
+            <label htmlFor="facility1">Main Hall</label>
+            <input
+              type="checkbox"
+              id="facility1"
+              name="facility1"
+              value="Main Hall"
+              className="check-box"
+            />
+          </div>
 
-        <div className="flex flex-row gap-2 items-center">
-          <label htmlFor="facility2">Kitchen</label>
-          <input
-            type="checkbox"
-            id="facility2"
-            name="facility2"
-            value="Kitchen"
-            className="check-box"
-          />
-        </div>
+          <div className="flex flex-row gap-2 items-center">
+            <label htmlFor="facility2">Kitchen</label>
+            <input
+              type="checkbox"
+              id="facility2"
+              name="facility2"
+              value="Kitchen"
+              className="check-box"
+            />
+          </div>
 
-        <div className="flex flex-row gap-2 items-center">
-          <label htmlFor="facility3">Bar Area</label>
-          <input
-            type="checkbox"
-            id="facility3"
-            name="facility3"
-            value="Bar Area"
-            className="check-box"
-          />
-        </div>
+          <div className="flex flex-row gap-2 items-center">
+            <label htmlFor="facility3">Bar Area</label>
+            <input
+              type="checkbox"
+              id="facility3"
+              name="facility3"
+              value="Bar Area"
+              className="check-box"
+            />
+          </div>
+        </span>
       </span>
 
       <motion.button
@@ -361,7 +336,7 @@ const ContactForm = ({ formRef, handleSubmit, isFormShowing }) => {
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, ease: "easeIn", delay: 0.5 }}
-        className="call-to-action-button !bg-primary-200 !text-background w-fit hover:!bg-accent hover:!text-text mt-4"
+        className="call-to-action-button !w-fit mt-4"
       >
         <span className="text-lg">review booking</span>
         <ArrowRightIcon size={36} className={""} />

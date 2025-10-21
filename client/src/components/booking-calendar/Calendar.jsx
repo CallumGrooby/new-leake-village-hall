@@ -60,10 +60,6 @@ export const Calendar = () => {
     return map;
   }, [bookings]);
 
-  const monthNames = Array.from({ length: 12 }, (_, i) =>
-    new Date(2000, i).toLocaleString("default", { month: "long" })
-  );
-
   function goPrevMonth() {
     if (month === 1) {
       setYear((y) => y - 1);
@@ -88,6 +84,45 @@ export const Calendar = () => {
 
   return (
     <div className={`${styles.calendar} basis-3/4 grow`}>
+      <CalendarControls
+        year={year}
+        month={month}
+        setYear={setYear}
+        setMonth={setMonth}
+        goPrevMonth={goPrevMonth}
+        goNextMonth={goNextMonth}
+        jumpToToday={jumpToToday}
+      />
+
+      <CalendarGrid
+        loading={loading}
+        error={error}
+        weekDays={weekDays}
+        offset={offset}
+        daysInSelectedMonth={daysInSelectedMonth}
+        bookingsByDay={bookingsByDay}
+        selectedBox={selectedBox}
+        handleSelect={handleSelect}
+      />
+    </div>
+  );
+};
+
+const CalendarControls = ({
+  year,
+  month,
+  setYear,
+  setMonth,
+  goPrevMonth,
+  goNextMonth,
+  jumpToToday,
+}) => {
+  const monthNames = Array.from({ length: 12 }, (_, i) =>
+    new Date(2000, i).toLocaleString("default", { month: "long" })
+  );
+
+  return (
+    <section className="bg-primary-200 text-background px-4 py-2">
       <div className="mb-4 flex items-center justify-between gap-3">
         <h1 className="text-2xl font-semibold">
           {new Date(year, month - 1).toLocaleString("default", {
@@ -101,8 +136,8 @@ export const Calendar = () => {
           <button
             type="button"
             onClick={goPrevMonth}
-            className="inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-sm
-                 hover:bg-accent active:bg-accent focus:outline-none focus:ring-2 focus:ring-primary-100"
+            className="inline-flex items-center border border-accent px-3 py-1.5 text-base
+                 hover:bg-accent active:bg-background focus:outline-none focus:ring-2 focus:ring-background cursor-pointer hover:text-text"
             aria-label="Previous month"
             title="Previous month"
           >
@@ -120,8 +155,8 @@ export const Calendar = () => {
           <button
             type="button"
             onClick={goNextMonth}
-            className="inline-flex items-center rounded-md border border-gray-300 px-3 py-1.5 text-sm
-                 hover:bg-accent active:bg-accent focus:outline-none focus:ring-2 focus:ring-primary-100"
+            className="inline-flex items-center border border-accent px-3 py-1.5 text-base
+                 hover:bg-accent active:bg-background focus:outline-none focus:ring-2 focus:ring-background cursor-pointer hover:text-text"
             aria-label="Next month"
             title="Next month"
           >
@@ -139,13 +174,10 @@ export const Calendar = () => {
       </div>
 
       {/* Controls bar */}
-      <div className="mb-6 flex flex-wrap items-end gap-4 rounded-lg border-2 border-black bg-white p-4 shadow-sm">
+      <div className="mb-6 flex flex-wrap items-end gap-4">
         {/* Year input */}
         <div className="flex flex-col">
-          <label
-            htmlFor="year"
-            className="mb-1 text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="year" className="form-label">
             Year
           </label>
           <input
@@ -154,26 +186,21 @@ export const Calendar = () => {
             inputMode="numeric"
             value={year}
             onChange={(e) => setYear(Number(e.target.value))}
-            className="w-32 rounded-sm border-2 border-black px-3 py-2 text-sm
-                 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="w-32 form-input"
           />
-          <p className="mt-1 text-xs text-gray-500">Type a year</p>
+          <p className="mt-1 text-sm text-accent/80">Type a year</p>
         </div>
 
         {/* Month select (clearer than typing 1–12) */}
         <div className="flex flex-col">
-          <label
-            htmlFor="month"
-            className="mb-1 text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="month" className="form-label">
             Month
           </label>
           <select
             id="month"
             value={month}
             onChange={(e) => setMonth(Number(e.target.value))}
-            className="w-48 rounded-sm border-2 border-black px-3 py-2 text-sm
-                 focus:border-blue-500 focus:ring focus:ring-blue-200"
+            className="w-48 form-input"
           >
             {monthNames.map((name, i) => (
               <option key={name} value={i + 1}>
@@ -181,7 +208,7 @@ export const Calendar = () => {
               </option>
             ))}
           </select>
-          <p className="mt-1 text-xs text-gray-500">Pick a month</p>
+          <p className="mt-1 text-sm text-accent/80">Pick a month</p>
         </div>
 
         {/* Today shortcut (styled like your CTA palette) */}
@@ -189,15 +216,29 @@ export const Calendar = () => {
           <button
             type="button"
             onClick={jumpToToday}
-            className="inline-flex items-center rounded-sm border-2 border-black bg-primary-200
-                 px-3 py-2 text-sm font-medium text-background hover:bg-accent hover:text-text
-                 focus:outline-none focus:ring focus:ring-blue-200"
+            className="inline-flex items-center border border-accent px-6 py-1.5 text-base uppercase hover:text-text
+                 hover:bg-accent active:bg-background focus:outline-none focus:ring-2 focus:ring-background cursor-pointer "
           >
             Today
           </button>
         </div>
       </div>
+    </section>
+  );
+};
 
+const CalendarGrid = ({
+  loading,
+  error,
+  weekDays,
+  offset,
+  daysInSelectedMonth,
+  bookingsByDay,
+  selectedBox,
+  handleSelect,
+}) => {
+  return (
+    <>
       {loading && <p>Loading bookings...</p>}
       {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
 
@@ -230,7 +271,7 @@ export const Calendar = () => {
           );
         })}
       </ol>
-    </div>
+    </>
   );
 };
 
@@ -240,13 +281,9 @@ const CalendarBox = ({ date, bookings, isSelected, onSelect }) => {
   return (
     <li
       onClick={onSelect}
-      className={`flex flex-col h-[12vw] max-h-[125px]
-                  transition-colors hover:bg-sky-50 ${
-                    isSelected ? "bg-skyblue-200" : "bg-white"
-                  }`}
-      style={{ backgroundColor: isSelected ? "skyblue" : "white" }} // keep your original highlight
+      className={`flex flex-col h-[12vw] max-h-[180px] border border-primary-200 cursor-pointer`} // keep your original highlight
     >
-      <span className="block text-base size-6 bg-primary-200 text-white text-center rounded-br-sm">
+      <span className="block text-base size-6 bg-accent text-text text-center rounded-br-sm">
         {date.getDate()}
       </span>
 
@@ -264,9 +301,13 @@ const CalendarBox = ({ date, bookings, isSelected, onSelect }) => {
               return (
                 <div
                   key={idx}
-                  className="flex items-center gap-1 bg-accent mb-px pl-5 text-text border-dashed border border-black"
+                  className="flex items-center gap-1 bg-inherit mb-px text-text  px-2 py-1"
                 >
-                  <span className="bg-white  w-full">{label}</span>
+                  <div
+                    className="w-4 h-4 rounded-full bg-accent shrink-0"
+                    aria-hidden
+                  ></div>
+                  <span className="bg-inherit w-full">{label}</span>
                 </div>
               );
             })}
