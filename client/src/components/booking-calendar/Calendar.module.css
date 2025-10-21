@@ -16,19 +16,19 @@
 .calendar ol {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-gap: 1em;
+  grid-gap: 0.25em;
   margin: 0 auto;
-  max-width: 64em;
+  /* max-width: 80em; */
   padding: 0;
 }
 
 /* was: li {...} */
 .calendar li {
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: center;
   list-style: none;
-  margin-left: 0;
+  margin-left: 0; */
   font-size: calc(16px + (21 - 16) * ((100vw - 300px) / (1600 - 300)));
 }
 
@@ -39,12 +39,12 @@
   height: 4vw;
 }
 
-.dayGrid li {
+/* .dayGrid li {
   background-color: #eaeaea;
   border: 1px solid #eaeaea;
   height: 12vw;
   max-height: 125px;
-}
+} */
 
 .weekdays abbr[title] {
   border: none;

@@ -15,7 +15,7 @@ function App() {
   // if (!bookings.length) return <p>No bookings found.</p>;
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col ">
       <Navigation />
       <Outlet />
       <Footer />

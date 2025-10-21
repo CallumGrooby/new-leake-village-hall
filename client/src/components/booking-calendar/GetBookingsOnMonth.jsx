@@ -19,7 +19,7 @@ export const useBookingsOnMonth = ({ month, year }) => {
       .then((json) => setData(json.data || []))
       .catch(setError)
       .finally(() => setLoading(false));
-  }, [month, year]); // ✅ refetch when month or year changes
+  }, [month, year]); //refetch when month or year changes
 
   return { data, loading, error };
 };

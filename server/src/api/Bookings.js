@@ -6,19 +6,39 @@ export const BookingRouter = express.Router();
 
 BookingRouter.post("/add-booking", async (req, res) => {
   try {
-    let { name, emailAddress, date, time, message } = req.body;
+    let {
+      firstName,
+      lastName,
+      emailAddress,
+      date,
+      startTime,
+      finishTime,
+      message,
+      phoneNumber,
+      address,
+    } = req.body;
 
-    name = name?.trim();
+    firstName = firstName?.trim();
+    lastName = lastName?.trim();
     emailAddress = emailAddress?.trim();
     message = message?.trim();
 
     // Test for empties
-    if (!name || !emailAddress || !date || !time || !message) {
+    if (
+      !firstName ||
+      !lastName ||
+      !emailAddress ||
+      !date ||
+      !startTime ||
+      !finishTime ||
+      !phoneNumber ||
+      !address
+    ) {
       return res.json({ status: "FAILED", message: "Empty input field" });
     }
 
     // regex to test if name contains anything other than letters, reject it
-    if (!/^[a-zA-Z\s]*$/.test(name)) {
+    if (!/^[a-zA-Z\s]*$/.test(firstName) || !/^[a-zA-Z\s]*$/.test(lastName)) {
       return res.json({ status: "FAILED", message: "Invalid Name Entered" });
     }
 
@@ -26,15 +46,23 @@ BookingRouter.post("/add-booking", async (req, res) => {
       return res.json({ status: "FAILED", message: "Invalid message Entered" });
     }
 
+    if (!/^[a-zA-Z\s]*$/.test(address)) {
+      return res.json({ status: "FAILED", message: "Invalid address Entered" });
+    }
+
     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(emailAddress)) {
       return res.json({ status: "FAILED", message: "Invalid Email Entered" });
     }
 
     const newBooking = new Booking({
-      name,
+      firstName,
+      lastName,
       emailAddress,
       date: new Date(date),
-      time,
+      startTime,
+      finishTime,
+      address,
+      phoneNumber,
       message,
       approved: false,
       paid: false,
@@ -165,6 +193,7 @@ BookingRouter.get("/bookings-by-month", async (req, res) => {
     }
 
     const bookings = await Booking.find(filter).sort({ date: 1 });
+
     res.json({
       status: "SUCCESS",
       data: bookings,
