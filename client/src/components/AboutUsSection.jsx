@@ -3,6 +3,7 @@ import tempImage from "../assets/placeholder.png";
 import { ArrowRightIcon, CalendarIcon } from "../assets/icons/Icons";
 
 import { motion } from "motion/react";
+import { Link } from "react-router-dom";
 
 const paragraphs = [
   "Welcome to Eastville Midville and New Leake Village Hall, where our charming village meets the breath taking country side. Here our hall is more than just a venue its the vibrant heart of our rural community.",
@@ -62,7 +63,7 @@ const AboutUsCTA = () => {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
       viewport={{ once: false, amount: 0.3 }}
-      className="flex flex-col-reverse md:flex-row gap-4 items-center mt-32"
+      className="flex flex-col-reverse md:flex-row gap-4 items-center mt-16 mb-16"
     >
       <motion.article
         initial={{ opacity: 0, x: -10 }}
@@ -89,17 +90,20 @@ const AboutUsCTA = () => {
           space is ready for you.
         </p>
 
-        <motion.button
-          type="button"
-          className="call-to-action-button !bg-primary-200 !text-background hover:!bg-primary-100 hover:!text-accent self-center md:self-start"
+        <motion.div
           initial={{ opacity: 0, x: -10 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
           viewport={{ once: false, amount: 0.3 }}
         >
-          View Facilities
-          <ArrowRightIcon size={40} className={""} />
-        </motion.button>
+          <Link
+            to="/about"
+            className="call-to-action-button !bg-primary-200 !text-background hover:!bg-primary-100 hover:!text-accent self-center md:self-start items-center text-xl"
+          >
+            View Facilities
+            <ArrowRightIcon size={40} className={""} />
+          </Link>
+        </motion.div>
       </motion.article>
 
       <div

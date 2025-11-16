@@ -67,6 +67,7 @@ BookingRouter.post("/add-booking", async (req, res) => {
       approved: false,
       paid: false,
       invoiceSent: false,
+      typeOfBooking: req.body.typeOfBooking,
     });
     const savedBooking = await newBooking.save();
 

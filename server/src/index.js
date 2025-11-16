@@ -5,6 +5,7 @@ import { connectDB } from "./db.js";
 import { UserRouter } from "./api/User.js";
 import { authMiddleware } from "./middleware/auth.js";
 import { BookingRouter } from "./api/Bookings.js";
+import { EventRouter } from "./api/Events.js";
 
 const app = express();
 app.use(cors());
@@ -17,6 +18,7 @@ const MONGODB_URI = process.env.MONGODB_URI;
 // Mount the router
 app.use("/api/users", UserRouter);
 app.use("/api/booking", BookingRouter);
+app.use("/api/event", EventRouter);
 
 connectDB(MONGODB_URI)
   .then(() => {

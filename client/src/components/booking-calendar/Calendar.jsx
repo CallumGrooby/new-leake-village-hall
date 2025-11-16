@@ -1,10 +1,27 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useBookingsOnMonth } from "./GetBookingsOnMonth";
 import styles from "./Calendar.module.css";
 
 export const Calendar = () => {
-  const [year, setYear] = useState(2025);
-  const [month, setMonth] = useState(10); // example: October 2025
+  //#region Initialize month/year to current date safely
+  const currentMonth = new Date().getMonth() + 1;
+  const currentYear = new Date().getFullYear();
+
+  const setYearSafe = (y) => {
+    if (y < 2000) return 2000;
+    else if (y > 2100) return 2100;
+    else return y;
+  };
+
+  const setMonthSafe = (m) => {
+    if (m < 1) return 1;
+    else if (m > 12) return 12;
+    else return m;
+  };
+
+  const [year, setYear] = useState(setYearSafe(currentYear));
+  const [month, setMonth] = useState(setMonthSafe(currentMonth)); // example: January 2025
+  //#endregion
 
   const {
     data: bookings,

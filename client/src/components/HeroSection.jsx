@@ -2,6 +2,7 @@ import React from "react";
 import { AnimatePresence, motion } from "motion/react";
 import HallPicture from "../assets/VillageHall.png";
 import { ArrowRightIcon, CalendarIcon } from "../assets/icons/Icons";
+import { Link } from "react-router-dom";
 export const HeroSection = () => {
   return (
     <AnimatePresence>
@@ -18,30 +19,38 @@ export const HeroSection = () => {
             village hall brings people together all year round.
           </p>
 
-          <div className="flex flex-row gap-4 justify-center mt-8">
-            <motion.button
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, ease: "easeIn", delay: 0.5 }}
-              type="button"
-              className="call-to-action-button"
-            >
-              <span className="text-lg">See Whats One</span>
-              <CalendarIcon size={36} className={""} />
-            </motion.button>
-
-            <motion.button
+          <div className="flex flex-col items-center sm:flex-row gap-4 justify-center mt-8">
+            <motion.div
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, ease: "easeIn", delay: 0.5 }}
-              type="button"
-              className="call-to-action-button !bg-inherit border border-background !text-background hover:border-accent hover:!text-accent "
             >
-              <span className="font-semibold tracking-wider font-mulish text-lg">
-                Hire the Hall
-              </span>
-              <ArrowRightIcon size={36} className="text-current" />
-            </motion.button>
+              <Link
+                to="/bookings"
+                className="call-to-action-button flex items-center gap-2  max-w-[264px] w-full"
+              >
+                <span className="font-semibold tracking-wider font-mulish text-lg">
+                  Hire the Hall
+                </span>
+                <CalendarIcon size={36} className="text-current" />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, ease: "easeIn", delay: 0.5 }}
+            >
+              <Link
+                to="/about"
+                className="call-to-action-button !bg-inherit border border-background !text-background hover:border-accent hover:!text-accent flex items-center gap-2 max-w-[264px] w-full"
+              >
+                <span className="font-semibold tracking-wider font-mulish text-lg">
+                  View Facilities
+                </span>
+                <ArrowRightIcon size={36} className="text-current" />
+              </Link>
+            </motion.div>
           </div>
         </motion.header>
 

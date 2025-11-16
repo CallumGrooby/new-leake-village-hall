@@ -24,6 +24,8 @@ const BookingSchema = new Schema({
   finishTime: { type: String, required: true },
 
   message: { type: String },
+  nameOfEvent: { type: String },
+  typeOfBooking: { type: String, required: true },
 
   approved: { type: Boolean, default: false },
   paid: { type: Boolean, default: false },

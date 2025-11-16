@@ -38,6 +38,8 @@ export const Bookings = () => {
         contactData["first-name"] +
         " " +
         contactData["last-name"],
+      typeOfBooking: "event",
+      nameOfEvent: "Private Event",
     };
 
     console.log("Submitting booking:", bookingPayload);
@@ -107,9 +109,9 @@ export const Bookings = () => {
   return (
     <section className="flex md:flex-row flex-col max-w-[1920px] w-full mx-auto grow gap-8 h-full my-12">
       <article className="basis-1/4 pt-16 bg-primary-200 text-background px-8">
-        <h2 className="text-xl text-accent font-light font-mulish">
+        {/* <h2 className="text-xl text-accent font-light font-mulish">
           EMNL Village Hall.
-        </h2>
+        </h2> */}
         <h1 className="text-4xl mb-8 font-bold leading-tight">
           Reservation Page
         </h1>
@@ -164,6 +166,7 @@ const DateForm = ({ formRef, handleSubmit }) => {
           </label>
           <input
             type="time"
+            step="1800"
             id="start-time"
             name="start-time"
             required
@@ -177,6 +180,7 @@ const DateForm = ({ formRef, handleSubmit }) => {
           </label>
           <input
             type="time"
+            step="1800"
             id="finish-time"
             name="finish-time"
             required
